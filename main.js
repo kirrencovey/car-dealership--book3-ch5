@@ -89,12 +89,40 @@ console.log(topProfitSeller)
 
 // * 5 Which model was the most popular?
 
+const carModels = sales2017.map(car => car.vehicle.model)
 
+const salesPerModel = carModels.reduce((newObject, model) => {
+    if (model in newObject) {
+        newObject[model]++;
+    } else {
+        newObject[model] = 1;
+    }
+    return newObject
+}, {})
+
+const modelWithTheMostest = Object.entries(salesPerModel)
+    .sort((a, b) => b[1] - a[1])[0][0];
+
+console.log(modelWithTheMostest)
 
 
 
 // * 6 Which bank provided the most loans to our customers?
 
+const bankLoans = sales2017.map(car => car.credit.credit_provider)
 
+const loansPerBank = bankLoans.reduce((newObject, bank) => {
+    if (bank in newObject) {
+        newObject[bank]++;
+    } else {
+        newObject[bank] = 1;
+    }
+    return newObject
+}, {})
+
+const mostUsedBank = Object.entries(loansPerBank)
+    .sort((a, b) => b[1] - a[1])[0][0];
+
+console.log(mostUsedBank)
 
 
