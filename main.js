@@ -69,8 +69,21 @@ console.log(topSeller)
 
 
 // * 4 Which salesperson made the most profit?
+const sellerAndProfit = sales2017.map(car => [[car.sales_agent.first_name, car.sales_agent.last_name].join(" "), car.gross_profit])
 
+const profitPerSeller = sellerAndProfit.reduce((newObject, name) => {
+    if (name[0] in newObject) {
+        newObject[name[0]] += name[1];
+    } else {
+        newObject[name[0]] = name[1];
+    }
+    return newObject
+}, {})
 
+const topProfitSeller = Object.entries(profitPerSeller)
+    .sort((a, b) => b[1] - a[1])[0][0];
+
+console.log(topProfitSeller)
 
 
 
